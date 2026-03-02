@@ -1,0 +1,49 @@
+"""
+This file contains the load stage of our pipeline
+
+We could keep the data in a df or a csv file, but I think we should use a sqlite db.
+
+This file should create the table if it doesn't exis in the db, and then load the data.
+"""
+
+import sqlite3
+import pandas as pd
+
+from ETL.config import DB_PATH, TABLE_NAME
+
+
+"""
+this function will create the table if it doesn't exist in the db.
+takes in a connection to the db and creates the table with the needed schema
+"""
+
+def create_table(conn: sqlite3.Connection) -> None:
+    # TODO: implement
+    pass
+
+
+
+
+
+"""
+this function will add every row from the transformed DataFrame to the posts table.
+
+cast integer features to int beforehand, so the db stores them correctly
+"""
+
+def add_rows(conn: sqlite3.Connection, df: pd.DataFrame) -> None:
+    # TODO: implement
+    pass
+
+
+
+"""
+this is the top-level orchestrator function for the load stage
+
+check if the dataframe is empty
+create table if it doesnt exist, upsert the data, print a summary
+
+"""
+def load(df: pd.DataFrame, db_path: str = DB_PATH) -> None:
+    # TODO: implement
+    pass
