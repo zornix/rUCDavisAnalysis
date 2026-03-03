@@ -25,6 +25,7 @@ def create_table(conn: sqlite3.Connection) -> None:
                      author varchar(255), timestamp varchar(255),
                      upvotes int,  upvote_ratio int, numcomments int, spoiler int, 
                      flair varchar(255), has_Image int)""")
+    
     db.commit()
     
 
