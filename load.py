@@ -40,8 +40,8 @@ cast integer features to int beforehand, so the db stores them correctly
 
 def add_rows(conn: sqlite3.Connection, df: pd.DataFrame) -> None:
     # TODO: implement
-    #conn.execute(f"""ALTER TABLE """)
-    #conn.commit()
+    conn.execute(f"""ALTER TABLE {TABLE_NAME} ADD ROW in df""")
+    conn.commit()
 
     pass
 
