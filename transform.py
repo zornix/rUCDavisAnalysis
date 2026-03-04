@@ -208,5 +208,8 @@ it should convert a list of raw post dicts into a clean pandas DataFrame.
 if the input list is empty, return an empty DataFrame.
 """
 def transform(raw_posts: list[dict]) -> pd.DataFrame:
-    # TODO: implement
+    for post in raw_posts:
+        transform_post.append(transform_post(post_data))
+    if raw_posts is None:
+        return 0
     pass
