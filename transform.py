@@ -6,10 +6,11 @@ We will clean raw reddit post data, detect useful flags, and add engineered feat
 The output should be a pandas DataFrame that matches the db schema.
 """
 
+import re
+
 import pandas as pd
 from datetime import datetime, timezone
-
-from ETL.config import EMOJI_PATTERN
+from config import EMOJI_PATTERN
 
 
 # cleaning helpers
@@ -23,8 +24,13 @@ what this function should do:
     return None if input is not a string or becomes empty after cleaning
 """
 def clean_text(text: str) -> str | None:
-    # TODO: implement
-    pass
+    if not isinstance(text, str):
+        return None
+    text = EMOJI_PATTERN.sub("", text)
+    text = " ".join(text.split())
+    if text == "":
+        return None
+    return text
 
 
 # detection helpers
@@ -69,7 +75,8 @@ this function will return the character length of the cleaned title.
 """
 
 def compute_title_length(cleaned_title: str) -> int:
-    # TODO: implement
+    if cleaned_title is None:
+        return 0
     return len(cleaned_title)
 
 
@@ -79,16 +86,18 @@ this function will return the character length of cleaned selftext.
 return 0 if selftext is None.
 """
 def compute_selftext_length(cleaned_selftext: str | None) -> int:
-    # TODO: implement
-    pass
+    if cleaned_selftext is None:
+        return 0
+    return len(cleaned_selftext)
 
 
 """
 this function will count how many words are in the cleaned title.
 """
 def compute_title_word_count(cleaned_title: str) -> int:
-    # TODO: implement
-    pass
+    if cleaned_title is None:
+        return 0
+    return len(cleaned_title.split())
 
 
 """
