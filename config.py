@@ -17,11 +17,9 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; RedditScraper/1.0)"
 }
 
-"""
-reddit json api url template
-to use: REDDIT_JSON_URL.format(subreddit="UCDavis", sort="new")
-"""
-REDDIT_JSON_URL = "https://www.reddit.com/r/{subreddit}/{sort}.json"
+
+#url for request, append the cursor to get next 100
+REDDIT_JSON_URL = "https://www.reddit.com/r/UCDavis/new.json?limit=100"
 
 # DB variables
 DB_PATH = "reddit_posts.db"
