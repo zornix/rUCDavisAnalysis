@@ -6,6 +6,7 @@ We will clean raw reddit post data, detect useful flags, and add engineered feat
 The output should be a pandas DataFrame that matches the db schema.
 """
 
+from pkgutil import get_data
 import re
 
 import pandas as pd
@@ -206,8 +207,8 @@ def transform_post(post_data: dict) -> dict:
 
 # This function will transform a list of raw reddit post dicts into a clean pandas DataFrame. If the input list is empty, return an empty DataFrame.
 def transform(raw_posts: list[dict]) -> pd.DataFrame:
-    for post in raw_posts:
-        transform_post.append(transform_post(post_data))
+    for posts in raw_posts:
+        transform_post.append(transform_post(posts))
     if raw_posts is None:
         return 0
     pass

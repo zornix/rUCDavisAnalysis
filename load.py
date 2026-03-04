@@ -3,7 +3,7 @@ This file contains the load stage of our pipeline
 
 We could keep the data in a df or a csv file, but I think we should use a sqlite db.
 
-This file should create the table if it doesn't exis in the db, and then load the data.
+This file should create the table if it doesn't exist in the db, and then load the data.
 """
 
 import sqlite3
