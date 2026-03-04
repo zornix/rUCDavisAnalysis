@@ -67,12 +67,13 @@ def has_link(post_data: dict) -> int:
     else:
         return 1    # return 1 if post contains a link, else 0. 
 
-# checks whether or not the post includes a flair
-# if there is a flair, return 1 for true and 0 for false
-def has_flair(post_data: dict) --> int:
+
+
+# This function will detect if a post has a flair and return 1 or 0.
+def has_flair(post_data: dict) -> int:
     try:
-        flair = post_data.get("link_flair_text")
-        if flair:
+        flair = post_data.get("link_flair_text") # gets the flair text of the post, if it exists
+        if flair: # checks whether or not the post includes a flair
             return 1
         else:
             return 0
