@@ -44,16 +44,16 @@ def has_image(post_data: dict) -> int:
         print("Image error")
         return 0
 
-# checks whether or not the post includes a video
-# gets data on the video
-# if there is a video, return 1 for true and 0 for false
+
+# This function will detect if a post has a video and return 1 or 0.
 def has_video(post_data: dict) --> int:
     try:
-        videos = post_data.get("videos")
+        videos = post_data.get("videos") # gets data on the video
+        # checks whether or not the post includes a video
         if videos:
             return 1
         else:
-            return 0
+            return 0 # if there is a video, return 1 for true and 0 for false
     except:
         print("Video error")
         return 0
