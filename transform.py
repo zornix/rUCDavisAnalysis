@@ -73,14 +73,14 @@ def has_attachment(post_data: dict) -> int:
         return 1    # return 1 if post contains a link, else 0.
 
 
-# This function will detect if a post has a flair and return 1 or 0.
+# This function will detect if a post has a flair and return a tuple (Binary has flair/not, flairtext)
 def has_flair(post_data: dict) -> int:
     try:
         flair = post_data.get("link_flair_text") # gets the flair text of the post, if it exists
         if flair: # checks whether or not the post includes a flair
-            return 1
+            return (1,flair)
         else:
-            return 0
+            return (0, None)
     except:
         print("Flair error")
         return
@@ -167,10 +167,10 @@ def transform_post(post_data: dict) -> dict:
     #retrieve the data we scraped and cleaned and place it into a variable
     clean_title = clean_text(post_data.get("title"))
     clean_selftext = clean_text(post_data.get("text"))
+    num_keywords = count_keywords(clean_title)
 
     updated_utc = post_data.get("created_utc") #need to make this a normal timestamp
     num_comments = post_data.get("num_comments", 0)
-    upvotes = post_data.get("upvotes", 0)
 
     # variables related to the title
     title_length = compute_title_length(clean_title)
@@ -193,36 +193,27 @@ def transform_post(post_data: dict) -> dict:
     question = is_question(clean_title)
     engagement_ratio = compute_engagement_ratio(num_comments, upvotes)
     return {
-        "id": post_data['name'],
-        "timestamp": updated_utc
+        "id": post_data['id'],
+        "timestamp": updated_utc,
         "title": clean_title,
         "title_length": title_length,
         "title_words": title_words,
         "selftext": clean_selftext,
         "selftext_length": selftext_length,
-        "selftext_words": selftext_words
+        "selftext_words": selftext_words,
         "upvotes": post_data['ups'],
-
-
-
-
-
-
+        "upvote_ratio": post_data['upvote_ratio'],
         "image": post_image,
         "video": post_video,
-        "link": post_link,
-        "flair": post_flair,
-        "title_length": title_length,
-        "selftext_length": selftext_length,
-        "title_words": title_words,
-        "selftext_words": selftext_words,
+        "has_attachment": post_attch,
+        "has_flair": post_flair[0],
+        "flair_text": post_flair[1],
         "time_category": time_category,
         "day_posted": day_posted,
-        "question": question,
-        "engagement_ratio": engagement_ratio
+        "has_question": question,
+        "engagement_ratio": engagement_ratio,
+        "num_keywords": num_keywords
      } #return one dictionary with all final columns
-    pass
-
 
 
 # This function will transform a list of raw reddit post dicts into a clean pandas DataFrame. If the input list is empty, return an empty DataFrame.
