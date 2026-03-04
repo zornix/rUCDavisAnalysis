@@ -133,15 +133,12 @@ def compute_day_of_week(created_utc: float) -> str:
     return pd.to_datetime(created_utc, unit="s", utc=True).day_name()
 
 
-"""
-this function will detect if a cleaned title looks like a question.
+# This function checks if the title contains a question mark.
 
-return 1 if title ends with "?", else 0.
-"""
 def is_question(cleaned_title: str) -> int:
     if cleaned_title is None or cleaned_title == "":
         return 0
-    if cleaned_title[-1] == "?":
+    if "?" is in cleaned_title:
         return 1
     else:
         return 0
