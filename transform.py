@@ -171,18 +171,23 @@ def transform_post(post_data: dict) -> dict:
     updated_utc = post_data.get("created_utc")
     num_comments = post_data.get("num_comments", 0)
     upvotes = post_data.get("upvotes", 0)
+    
+    # variables related to the title
+    title_length = compute_title_length(clean_title)
+    title_words = compute_title_word_count(clean_title)
+    question = is_question(clean_title)
 
+    # variables related to the body of text
     post_image = has_image(post_data)
     post_video = has_video(post_data)
     post_link = has_link(post_data)
     post_flair = has_flair(post_data)
-    title_length = compute_title_length(clean_title)
     selftext_length = compute_selftext_length(clean_selftext)
-    title_words = compute_title_word_count(clean_title)
     selftext_words = compute_title_word_count(clean_selftext)
+    
+    # variables related to the time posted and engagement
     time_category = time_category(updated_utc)
     day_posted = compute_day_of_week(updated_utc)
-    question = is_question(clean_title)
     engagement_ratio = compute_engagement_ratio(num_comments, upvotes)
     return {
         "image": post_image,
