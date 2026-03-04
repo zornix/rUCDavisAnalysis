@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from config import EMOJI_PATTERN
 
 
-# cleaning helpers
+# CLEANING HELPERS
 
 # This function will clean the text by removing emojis and collapsing whitespace.
 def clean_text(text: str) -> str | None:
@@ -24,6 +24,8 @@ def clean_text(text: str) -> str | None:
     if text == "": # If the cleaned text is an empty string, it will return None.
         return None
     return text
+
+
 
 
 # DETECTION HELPERS
@@ -68,7 +70,6 @@ def has_link(post_data: dict) -> int:
         return 1    # return 1 if post contains a link, else 0.
 
 
-
 # This function will detect if a post has a flair and return 1 or 0.
 def has_flair(post_data: dict) -> int:
     try:
@@ -80,6 +81,9 @@ def has_flair(post_data: dict) -> int:
     except:
         print("Flair error")
         return
+
+
+
 
 # FEATURE ENGINEERING HELPERS
 
@@ -134,16 +138,12 @@ def is_question(cleaned_title: str) -> int:
     else:
         return 0
 
-
-"""
-this function will compute engagement ratio for a post.
-
-ratio = num_comments / max(upvotes, 1)
-use max(upvotes, 1) to avoid division by zero.
-"""
+# This function will compute engagement ratio for a post.
 def compute_engagement_ratio(num_comments: int, upvotes: int) -> float:
     ratio = num_comments / (max(upvotes, 1))
     return ratio
+
+
 
 
 # TOP-LEVEL TRANSFORM FUNCTIONS
