@@ -190,12 +190,8 @@ def transform_post(post_data: dict) -> dict:
     pass
 
 
-"""
-this function is the top-level orchestrator for transform stage.
 
-it should convert a list of raw post dicts into a clean pandas DataFrame.
-if the input list is empty, return an empty DataFrame.
-"""
+# This function will transform a list of raw reddit post dicts into a clean pandas DataFrame. If the input list is empty, return an empty DataFrame.
 def transform(raw_posts: list[dict]) -> pd.DataFrame:
     # TODO: implement
     pass
