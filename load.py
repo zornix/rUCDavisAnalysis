@@ -59,5 +59,15 @@ create table if it doesnt exist, upsert the data, print a summary
 
 """
 def load(df: pd.DataFrame, db_path: str = DB_PATH) -> None:
-    # TODO: implement
+    if df.empty:
+        print("Dataframe is empty.")
+        return
+    conn = sqlite3.connect(db_path)
+    create_table(conn, df)
+    add_rows(conn, df)
+    cur = conn.execute(f"SELECT * FROM {TABLE_NAME} LIMIT 5")
+    rows = cur.fetchall()
+    for row in rows:
+        print(row)
+    conn.close()
     pass
