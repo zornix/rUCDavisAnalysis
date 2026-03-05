@@ -187,29 +187,29 @@ def transform_post(post_data: dict) -> dict:
     question = is_question(clean_title)
     engagement_ratio = compute_engagement_ratio(num_comments, upvotes)
     return {
-        "id": post_data['id'],
+        "ID": post_data['id'],
         # time
-        "timestamp": hours,
-        "time_category": post_time_category,
-        "day_posted": day_posted,
+        "Timestamp": hours,
+        "Time Category": post_time_category,
+        "Day Posted": day_posted,
         # title info
-        "title": clean_title,
-        "title_length": title_length,
-        "title_words": title_words,
+        "Title": clean_title,
+        "Title Length": title_length,
+        "Title Words": title_words,
         # body text info
-        "selftext": clean_selftext,
-        "selftext_length": selftext_length,
-        "selftext_words": selftext_words,
-        "has_media": post_media,
-        "has_attachment": post_attch,
-        "has_flair": post_flair[0],
-        "flair_text": post_flair[1],
-        "has_question": question,
+        "Text": clean_selftext,
+        "Text Length": selftext_length,
+        "Text Words": selftext_words,
+        "Media": post_media,
+        "Attachment": post_attch,
+        "Flair": post_flair[0],
+        "Flair Text": post_flair[1],
+        "Question": question,
         # engagement
-        "upvotes": post_data['ups'],
-        "upvote_ratio": post_data['upvote_ratio'],
-        "engagement_ratio": engagement_ratio,
-        "num_keywords": num_keywords
+        "Upvotes": post_data['ups'],
+        "Upvote Ratio": post_data['upvote_ratio'],
+        "Engagement Ratio": engagement_ratio,
+        "Num of Keywords": num_keywords
      } #return one dictionary with all final columns
 
 
