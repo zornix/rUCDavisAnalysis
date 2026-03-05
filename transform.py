@@ -194,31 +194,21 @@ def transform_post(post_data: dict) -> dict:
     engagement_ratio = compute_engagement_ratio(num_comments, upvotes)
     return {
         "id": post_data['name'],
-        "timestamp": updated_utc
+        "timestamp": updated_utc,
+        "day_posted": day_posted,
+        "time_category": time_category,
         "title": clean_title,
         "title_length": title_length,
         "title_words": title_words,
         "selftext": clean_selftext,
         "selftext_length": selftext_length,
-        "selftext_words": selftext_words
-        "upvotes": post_data['ups'],
-
-
-
-
-
-
+        "selftext_words": selftext_words,
         "image": post_image,
         "video": post_video,
         "link": post_link,
         "flair": post_flair,
-        "title_length": title_length,
-        "selftext_length": selftext_length,
-        "title_words": title_words,
-        "selftext_words": selftext_words,
-        "time_category": time_category,
-        "day_posted": day_posted,
         "question": question,
+        "upvotes": post_data['ups'],
         "engagement_ratio": engagement_ratio
      } #return one dictionary with all final columns
     pass
