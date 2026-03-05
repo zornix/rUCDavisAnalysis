@@ -43,6 +43,7 @@ def display_output(df: pd.DataFrame) -> None:
     print("\n========== POSTS PREVIEW ==========\n")
 
     for row in df.iterrows():
+<<<<<<< HEAD
         print(f"title: {row['title']}")
         print(f"timestamp: {row['hours']}") # used to be created_utc
         print(f"time_category: {row['time_category']}")
@@ -61,6 +62,26 @@ def display_output(df: pd.DataFrame) -> None:
         print(f"num_keywords: {row['num_keywords']}")
         print(f"upvote_ratio: {row['upvote_ratio']}")
         print(f"engagement_ratio: {row['engagement_ratio']}")
+=======
+        print(f"Title: {row['title']}")
+        print(f"Timestamp: {row['updated_utc']}")
+        print(f"Time Category: {row['time_category']}")
+        print(f"Day Posted: {row['day_posted']}")
+        print(f"Title Length: {row['title_length']}")
+        print(f"Title Words: {row['title_words']}")
+        print(f"Text: {row['selftext']}")
+        print(f"Text Length: {row['selftext_length']}")
+        print(f"Text Words: {row['selftext_words']}")
+        print(f"Media: {row['has_media']}")
+        print(f"Attachment: {row['has_attachment']}")
+        print(f"Flair: {row['has_flair']}")
+        print(f"Flair Text: {row['flair_text']}")
+        print(f"Question: {row['has_question']}")
+        print(f"Upvotes: {row['upvotes']}")
+        print(f"Num of Keywords: {row['title']}")
+        print(f"Upvote Ratio: {row['upvote_ratio']}")
+        print(f"Engagement Ratio: {row['title']}")
+>>>>>>> e57aeb8 (bugfixes)
         print("-" * 100)
 
     print("\n========== END ==========\n")
