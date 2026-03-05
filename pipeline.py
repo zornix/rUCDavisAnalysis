@@ -62,6 +62,7 @@ def display_output(df: pd.DataFrame) -> None:
         print(f"Number of Keywords: {row['title']}")
         print(f"Upvote Ratio: {row['upvote_ratio']}")
         print(f"Engagement Ratio: {row['title']}")
+        print("-" * 100)
 
     print("\n========== END ==========\n")
     pass
