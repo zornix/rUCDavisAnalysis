@@ -222,8 +222,12 @@ def transform_post(post_data: dict) -> dict:
 
 # This function will transform a list of raw reddit post dicts into a clean pandas DataFrame. If the input list is empty, return an empty DataFrame.
 def transform(raw_posts: list[dict]) -> pd.DataFrame:
+    if not raw_posts:
+        return pd.DataFrame()
+    
+    transformed_posts = []
     for posts in raw_posts:
-        transform_post.append(transform_post(posts))
-    if raw_posts is None:
-        return 0
+        transform_posts.append(transform_post(posts))
+
+    return pd.DataFrame(transformed_posts)
     pass

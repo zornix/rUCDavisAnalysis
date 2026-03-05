@@ -36,19 +36,35 @@ what this function should do:
     handle empty DataFrames gracefully
 """
 def display_output(df: pd.DataFrame) -> None:
+    if df.empty:
+        print("No posts to display.")
+        return
+
+    print("\n========== POSTS PREVIEW ==========\n")
+
     for i in df.iterrows():
         print(f"Title: {row['title']}")
-        print(f"Upvotes: {row['upvotes']}")
+        print(f"Time Stamp: {row['updated_utc']}")
         print(f"Time Category: {row['time_category']}")
         print(f"Day Posted: {row['day_']}")
-        print(f"Image: {row['title']}")
+        print(f"Title Length: {row['title_length']}")
+        print(f"Title Number of Words: {row['title_words']}")
+        print(f"Text: {row['selftext']}")
+        print(f"Text Length: {row['selftext_length']}")
+        print(f"Text Number of Words: {row['selftext_words']}")
+        print(f"Image: {row['image']}")
+        print(f"Video: {row['video']}")
+        print(f"Attachment: {row['has_attachment']}")
+        print(f"Flair: {row['has_flair']}")
+        print(f"Flair Text: {row['flair_text']}")
+        print(f"Question: {row['has_question']}")
+        print(f"Upvotes: {row['upvotes']}")
         print(f"Number of Keywords: {row['title']}")
+        print(f"Upvote Ratio: {row['upvote_ratio']}")
         print(f"Engagement Ratio: {row['title']}")
-        print(f"Title: {row['title']}")
 
+    print("\n========== END ==========\n")
     pass
-
-
 
 
 # Scrape 100 new posts, transform them, and load into SQLite
