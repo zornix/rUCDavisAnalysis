@@ -65,8 +65,6 @@ def has_video(post_data: dict) -> int:
 #A self-post is a post that has no link to a website, image, or video, but instead only contains text.
 # This function will detect if a post is a self post or not and return 1 or 0.
 def has_attachment(post_data: dict) -> int:
-    # return 1 if post conains a link, else 0.
-    # using the "is_self" field from reddit json to determine if the post is a self post (text only) or contains a link.
     if post_data.get("is_self") == True:
         return 0
     else:
