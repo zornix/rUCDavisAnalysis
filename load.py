@@ -42,10 +42,12 @@ def create_table(conn: sqlite3.Connection) -> None:
 # This function adds rows from the transformed DataFrame to the posts table in the database.
 # cast integer features to int beforehand, so the db stores them correctly
 def add_rows(conn: sqlite3.Connection, df: pd.DataFrame) -> None:
-    # TODO: implement
-    #conn.execute(f"""ALTER TABLE ADD ROW in df""")
-    #conn.commit()
-
+    df.to_sql(TABLE_NAME, conn, if_exists = "append", index = False)
+    if df.empty:
+        print("There are no more rows")
+        return
+    
+    conn.commit()
     pass
 
 
