@@ -31,36 +31,28 @@ def clean_text(text: str) -> str | None:
 
 # DETECTION HELPERS
 
-# This function will detect if a post has an image and return 1 or 0.
-def has_image(post_data: dict) -> int:
+# This function will detect if a post has an image / video and return 1 or 0.
+def has_media(post_data: dict) -> dict:
+    result = {"image": 0, "video": 0}
+    
     try:
+        # checks for image
         if post_data.get("post_hint") == "image":
-            return 1
+            result["image"] = 1
         else:
-            images = post_data.get("preview")
-            if images and images.get("images"):
-                return 1
-            else:
-                return 0
+            preview = post_data.get("preview")
+            if preview and preview.get("images"):
+                result["image"] = 1
+        
+        # Check for video
+        if post_data.get("is_video"):
+            result["video"] = 1
+
     except:
-        print("has_image error")
-        return 0
-
-
-# This function will detect if a post has a video and return 1 or 0.
-def has_video(post_data: dict) -> int:
-    try:
-        videos = post_data.get("is_video") # gets data on the video
-        # checks whether or not the post includes a video
-        if videos:
-            return 1
-        else:
-            return 0 # if there is a video, return 1 for true and 0 for false
-    except:
-        print("Video error")
-        return 0
-
-
+        print("Media error")
+        return None
+    
+    return result
 
 #A self-post is a post that has no link to a website, image, or video, but instead only contains text.
 # This function will detect if a post is a self post or not and return 1 or 0.
@@ -179,8 +171,8 @@ def transform_post(post_data: dict) -> dict:
     question = is_question(clean_title)
 
     # variables related to the body of text
-    post_image = has_image(post_data)
-    post_video = has_video(post_data)
+    post_media = has_media(post_data),
+
     post_attch = has_attachment(post_data)
     post_flair = has_flair(post_data)
 
@@ -207,8 +199,7 @@ def transform_post(post_data: dict) -> dict:
         "selftext": clean_selftext,
         "selftext_length": selftext_length,
         "selftext_words": selftext_words,
-        "image": post_image,
-        "video": post_video,
+        "has_media": post_media,
         "has_attachment": post_attch,
         "has_flair": post_flair[0],
         "flair_text": post_flair[1],
