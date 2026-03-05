@@ -36,7 +36,7 @@ def has_media(post_data: dict) -> dict:
     try:
         has_media = post_data.get("preview")
         has_media = post_data.get("images")
-            return 1
+        return 1
     except:
         print("Media error")
         return None
