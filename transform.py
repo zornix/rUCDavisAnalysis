@@ -206,7 +206,7 @@ def transform_post(post_data: dict) -> dict:
         "title_length": title_length,
         "title_words": title_words,
         # body text info
-        "selftext": clean_selftext,
+        "text": clean_selftext,
         "selftext_length": selftext_length,
         "selftext_words": selftext_words,
         "image": post_image,
