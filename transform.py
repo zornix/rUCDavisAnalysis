@@ -182,13 +182,14 @@ def transform_post(post_data: dict) -> dict:
     # variables related to the time posted and engagement
     post_time_category = time_category(updated_utc)
     day_posted = compute_day_of_week(updated_utc)
+    hours = compute_hour_posted(updated_utc)
 
     question = is_question(clean_title)
     engagement_ratio = compute_engagement_ratio(num_comments, upvotes)
     return {
         "id": post_data['id'],
         # time
-        "timestamp": updated_utc,
+        "timestamp": hours,
         "time_category": post_time_category,
         "day_posted": day_posted,
         # title info
