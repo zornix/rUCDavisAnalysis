@@ -15,7 +15,7 @@ from config import DB_PATH, TABLE_NAME
 # This function creates a table in the database if it does not already exists in db.
 def create_table(conn: sqlite3.Connection) -> None:
     cur = conn.execute(f"""CREATE TABLE IF NOT EXISTS {TABLE_NAME}(
-                    id varchar(255),
+                    id varchar(255) PRIMARY KEY,
                     timestamp float,
                     time_category varchar(255),
                     day_posted varchar(255),
@@ -32,8 +32,9 @@ def create_table(conn: sqlite3.Connection) -> None:
                     question int,
                     upvotes int,
                     upvote_ratio float,
-                    engagement_ratio float,
-                    num_keywords int)""")
+                    num_comments int,
+                    num_keywords int,
+                    score int)""")
 
     conn.commit()
 

@@ -66,9 +66,3 @@ def display_output(df: pd.DataFrame) -> None:
     print("\n========== END ==========\n")
     pass
 
-
-# Scrape 100 new posts, transform them, and load into SQLite
-df = run_pipeline()
-
-# # Start fresh (ignore saved cursor)
-# df = run_pipeline(subreddit="UCDavis", resume=False)
