@@ -37,7 +37,8 @@ def heatmap(table):
     corr = newTable.corr() # gets correlation of only numeric value in originall table
     plt.figure(figsize=(11,7))
     sns.heatmap(corr, annot=True)
-    return plt.show()
+    plt.savefig("../output/heatmap.png")
+    plt.show()
 
 # Distribution of upvotes per posts: summary statistics
 
