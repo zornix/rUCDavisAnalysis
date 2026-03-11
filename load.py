@@ -11,6 +11,15 @@ import pandas as pd
 
 from config import DB_PATH, TABLE_NAME
 
+# Temp table for staging rows before upsert; column order must match TABLE_NAME.
+POSTS_COLUMNS = [
+    "id", "timestamp", "time_category", "day_posted", "title", "title_length",
+    "title_words", "selftext", "selftext_length", "selftext_words", "media",
+    "attachment", "flair", "flair_text", "question", "upvotes", "upvote_ratio",
+    "num_comments", "num_keywords", "score",
+]
+TEMP_TABLE = "posts_load_temp"
+
 
 # This function creates a table in the database if it does not already exists in db.
 def create_table(conn: sqlite3.Connection) -> None:
@@ -39,16 +48,27 @@ def create_table(conn: sqlite3.Connection) -> None:
     conn.commit()
 
 
-# This function adds rows from the transformed DataFrame to the posts table in the database.
+# This function upserts rows from the transformed DataFrame to the posts table in the database.
+# Posts that already exist in the db are replaced, and new rows are inserted.
 def add_rows(conn: sqlite3.Connection, df: pd.DataFrame) -> None:
     if df.empty:
         print("There are no more rows")
         return
 
-    df.to_sql(TABLE_NAME, conn, if_exists = "append", index = False)
+    # df that has columns that exist both in POSTS_COLUMNS and df, in the order of the schema.
+    df_ordered = df[[c for c in POSTS_COLUMNS if c in df.columns]]
 
+    df_ordered.to_sql(TEMP_TABLE, conn, if_exists="replace", index=False)
+
+
+    # copy all the rows from the temp table into the main posts table. replace if there is an ID conflict.
+    conn.execute(
+        f"INSERT OR REPLACE INTO {TABLE_NAME} ({', '.join(POSTS_COLUMNS)}) "
+        f"SELECT {', '.join(POSTS_COLUMNS)} FROM {TEMP_TABLE}"
+    )
+
+    conn.execute(f"DROP TABLE IF EXISTS {TEMP_TABLE}")
     conn.commit()
-    pass
 
 # This function takes DataFrame and loads it into the database.
 def load(df: pd.DataFrame, db_path: str = DB_PATH) -> None:
@@ -60,7 +80,7 @@ def load(df: pd.DataFrame, db_path: str = DB_PATH) -> None:
     add_rows(conn, df) # Adds the rows from the df to the table
     cur = conn.execute(f"SELECT * FROM {TABLE_NAME} LIMIT 5")
     rows = cur.fetchall()
-    for row in rows:
-        print(row)
+    #for row in rows:
+    #    print(row)
     conn.close()
     pass

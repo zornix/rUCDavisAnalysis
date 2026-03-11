@@ -58,7 +58,7 @@ def transform(posts_data: list[dict]) -> pd.DataFrame:
         return pd.DataFrame()
 
     df = pd.DataFrame(posts_data)
-    print(df.columns.tolist())
+    #print(df.columns.tolist())
     #variables related to the title
     df["clean_title"] = clean_text_series(df["title"])
     df["title_length"] = df["clean_title"].str.len().astype(int)

@@ -82,12 +82,12 @@ def is_old_enough(post_data: dict) -> bool:
 
 def fetch_page(after: str | None = None) -> tuple[list[dict], str | None]:
     if after is not None:
-      url = REDDIT_JSON_URL + after
+        url = REDDIT_JSON_URL + "&after=" + after
     else:
-      url = REDDIT_JSON_URL
-    response = requests.get(url, headers = HEADERS, timeout = 10, verify = False).json()
-    cursor = response.get('data')['after']
-    data = response['data']['children']
+        url = REDDIT_JSON_URL
+    response = requests.get(url, headers=HEADERS, timeout=10, verify=False).json()
+    cursor = response.get("data", {}).get("after")  # the after token is None when we reach about 1000 posts.
+    data = response.get("data", {}).get("children", [])
 
     return (data, cursor)
 
@@ -99,20 +99,20 @@ def fetch_page(after: str | None = None) -> tuple[list[dict], str | None]:
 def extract() -> list[dict]:
     try:
         cursor = load_cursor()
-        print('Loaded cursor')
+        print("Loaded cursor")
         fetch = fetch_page(cursor)
-        print('Fetched the page')
-        listdata = fetch[0]
-        save_cursor(fetch[1])
-        print('Saved cursor & Data')
-    except:
-        print("Extract stage fail")
+        listdata, next_cursor = fetch[0], fetch[1]
+        save_cursor(next_cursor)
+        if next_cursor is None and listdata:
+            print("Reached end of listing (1000 items). ")
+        print("Fetched the page")
+    except Exception as e:
+        print("Extract stage fail:", e)
         return []
 
-
-    data = [post['data'] for post in listdata if is_old_enough(post['data'])]
-    print(f"Removed {len(listdata)-len(data)} post that were not old enough.")
-
+    data = [post["data"] for post in listdata if is_old_enough(post["data"])]
+    print(f"Added {len(data)} post(s) to the dataset.")
+    print(f"Removed {len(listdata) - len(data)} post(s) that were not old enough.")
 
     return data
 
