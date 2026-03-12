@@ -68,7 +68,7 @@ def run_lasso():
     data = load_data()
     X = data.loc[:, ["title_words", "selftext_words", "attachment", "flair", "question", "num_keywords", "num_comments"]]
     y = np.log2(data.loc[:, 'upvotes']+1)
-    model = Lasso(alpha=1.0)
+    model = Lasso(alpha=0.05)
     cv = RepeatedKFold(n_splits=10, n_repeats=3, random_state=1)
     scores = cross_val_score(model, X, y, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
     scores = np.absolute(scores)
@@ -79,4 +79,5 @@ def run_lasso():
     "Coefficient": model.coef_
     })
     print(coef_table)   
+    print(f"intercept: {model.intercept_}")
 run_lasso()
