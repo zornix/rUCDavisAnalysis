@@ -18,8 +18,8 @@ FEATURES = ["time_category", "day_posted", "title_words", "selftext_words", "att
 
 def prepare_training_data(df: pd.DataFrame):
 
-    #y = np.log2(df["upvotes"]+1) #log transformation
-    y = np.sqrt(df["upvotes"]) #square root transformation
+    y = np.log2(df["upvotes"]+1) #log transformation
+    #y = np.sqrt(df["upvotes"]) #square root transformation
     X = df[FEATURES].copy()
 
     for col in ["time_category", "day_posted"]:
