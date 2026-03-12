@@ -58,11 +58,14 @@ def daysort_upvotes_vs_comments():
     plt.figure(figsize=(10,7))
 
     for day, marker in markers.items():
-        day_reddit_posts = reddit_posts[reddit_posts["day_posted"] == day]
+        day_plot_df = reddit_posts[
+            (reddit_posts["day_posted"] == day) &
+            (reddit_posts["upvotes"].between(50, 1000))
+        ]
+        
         plt.scatter(
-            plot_df = reddit_posts[reddit_posts["upvotes"].between(50, 1000)]
-            plot_df["num_comments"],
-            plot_df["upvotes"],
+            day_plot_df["num_comments"],
+            day_plot_df["upvotes"],
             marker=marker,
             alpha=0.7,
             s=70,
