@@ -68,5 +68,9 @@ def run_lasso():
     scores = np.absolute(scores)
     print('Mean MAE: %.3f (%.3f)' % (np.mean(scores), np.std(scores)))
     model.fit(X, y)
-    print(model.coef_)
+    coef_table = pd.DataFrame({
+    "Variable": X.columns,
+    "Coefficient": model.coef_
+    })
+    print(coef_table)   
 run_lasso()
