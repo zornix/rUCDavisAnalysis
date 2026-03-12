@@ -42,3 +42,36 @@ def heatmap(table):
 
 # Distribution of upvotes per posts: summary statistics
 
+# Scatter plot of upvotes vs. comments sorted by the day of the week
+def daysort_upvotes_vs_comments():
+    markers = {
+        "Monday": "o",
+        "Tuesday": "s",
+        "Wednesday": "^",
+        "Thursday": "D",
+        "Friday": "P",
+        "Saturday": "*",
+        "Sunday": "X"
+    }
+
+    plt.figure(figsize=(10,7))
+
+    for day, marker in markers.items():
+        day_reddit_posts = reddit_posts[reddit_posts["day_posted"] == day]
+        plt.scatter(
+            day_reddit_posts["num_comments"],
+            day_reddit_posts["upvotes"],
+            marker=marker,
+            alpha=0.7,
+            s=70,
+            label=day
+        )
+
+    plt.title("Upvotes vs Comments by Day Posted")
+    plt.xlabel("Number of Comments")
+    plt.ylabel("Number of Upvotes")
+
+    plt.legend(title="Day Posted", bbox_to_anchor=(1.05,1))
+    plt.grid(alpha=0.3)
+
+    plt.show()
