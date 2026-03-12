@@ -95,3 +95,19 @@ def var_up(df):
 
         plt.show()
         plt.close() 
+
+#Upvotes vs Comments Categorized on Time of Day:
+plt.figure()
+sns.set_theme(style = 'white', palette = 'Set2') 
+plot = sns.scatterplot(
+    data= reddit_posts2,
+    x="upvotes",
+    y="num_comments",
+    hue="time_category",
+    style="time_category"
+)
+plot.set_title("Reddit Post Performance by Time of Upload")
+plot.set_xlabel("upvotes")
+plot.set_ylabel("comments")
+plt.show()
+plt.close() 
