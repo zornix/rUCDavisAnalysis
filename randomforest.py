@@ -88,7 +88,7 @@ def evaluate_kfold(X_enc, y, k=5):
     print(f"  Mean MAE = {-mae_scores.mean():.4f} ± {mae_scores.std():.4f}")
 
 
-# diagnostic plots
+# predicted vs actual plot
 def plot_predicted_vs_actual(y_true_log, y_pred_log):
     fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
@@ -120,34 +120,6 @@ def plot_predicted_vs_actual(y_true_log, y_pred_log):
     fig.savefig("visualizations/rf_pred_vs_actual.png", dpi=150)
     plt.close(fig)
     print("Saved visualizations/rf_pred_vs_actual.png")
-
-
-# residuals plot
-def plot_residuals(y_true_log, y_pred_log):
-    residuals = y_true_log - y_pred_log
-
-    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
-
-    # left: residuals vs predicted
-    ax = axes[0]
-    ax.scatter(y_pred_log, residuals, alpha=0.35, s=18, edgecolors="none")
-    ax.axhline(0, color="red", ls="--", lw=1.2)
-    ax.set_xlabel("Predicted  (log1p upvotes)")
-    ax.set_ylabel("Residual  (actual - predicted)")
-    ax.set_title("Residuals vs Predicted")
-
-    # right: histogram of residuals
-    ax = axes[1]
-    ax.hist(residuals, bins=40, edgecolor="black", alpha=0.7)
-    ax.axvline(0, color="red", ls="--", lw=1.2)
-    ax.set_xlabel("Residual")
-    ax.set_ylabel("Count")
-    ax.set_title("Residual Distribution")
-
-    fig.tight_layout()
-    fig.savefig("visualizations/rf_residuals.png", dpi=150)
-    plt.close(fig)
-    print("Saved visualizations/rf_residuals.png")
 
 
 # bar chart of gini importance for top_n features
