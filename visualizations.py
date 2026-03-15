@@ -95,6 +95,11 @@ def daysort_upvotes_vs_comments():
 
     plt.show()
 
+    fig.tight_layout()
+    fig.savefig("visualizations/daysort_comments_vs_upvotes.png", dpi=150)
+    plt.close(fig)
+    print("Saved visualizations/daysort_comments_vs_upvotes.png")
+
 # effect of title length on upvotes removing outliers and removing dense numbers
 def titlelength_upvotes():
     plt.figure(figsize=(8,6))
