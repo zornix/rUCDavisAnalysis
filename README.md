@@ -11,11 +11,13 @@ Prerequisites to run the code:
 ```pip install -r requirements.txt```
 
 **Pipeline**
+
 pipeline.py: Top-level orchestrator that runs extract → transform → load and returns the transformed DataFrame.
 config.py: Central constants (Reddit API headers/URL, DB path, table name, cursor file, emoji regex, batch size, sleep/time thresholds).
 init.py: Runs the pipeline repeatedly until a target number of posts is processed; used to build up the dataset over multiple batches.
 
 **ETL Pipeline**
+
 We structured our code like an ETL pipeline with clear separation of concerns.
 
 config.py: constants (Reddit API URL, DB path, table name, cursor file, emoji regex).
@@ -31,6 +33,7 @@ pipeline.py: Pipeline orchestrator that runs extract -> transform -> load and re
 init.py: Runs the pipeline repeatedly until a target number of posts is processed (1000 in our case, because Reddit's listing only has 1000).
 
 **Modeling & analysis**
+
 regression.py: Loads data from the DB, prepares features (dummies for categorical variables, log-transformed responce -> upvotes), fits multiple OLS and Lasso, and makes residuals and Q-Q plot.
 
 randomforest.py: Trains a RandomForest regressor on log(upvotes), runs 5-fold CV and held-out test set evaluation, and produces feature importance, permutation importance, and predicted-vs-actual values plots.
