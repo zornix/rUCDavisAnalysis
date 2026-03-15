@@ -93,12 +93,13 @@ def daysort_upvotes_vs_comments():
     plt.legend(title="Day Posted", bbox_to_anchor=(1.05,1))
     plt.grid(alpha=0.3)
 
-    plt.show()
-
     fig.tight_layout()
     fig.savefig("visualizations/daysort_comments_vs_upvotes.png", dpi=150)
     plt.close(fig)
     print("Saved visualizations/daysort_comments_vs_upvotes.png")
+
+    plt.show()
+
 
 # effect of title length on upvotes removing outliers and removing dense numbers
 def titlelength_upvotes():
