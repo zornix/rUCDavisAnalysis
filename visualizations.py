@@ -59,6 +59,7 @@ plot = sns.boxplot(
 )
 plt.xticks(rotation=45)
 plt.show()
+plt.close()
 
 
 
@@ -74,7 +75,7 @@ def daysort_upvotes_vs_comments():
         "Sunday": "X"
     }
 
-    plt.figure(figsize=(10,7))
+    fig, ax = plt.subplots(figsize=(10,7))
 
     for day, marker in markers.items():
         day_plot_df = reddit_posts[
@@ -97,14 +98,11 @@ def daysort_upvotes_vs_comments():
 
     plt.legend(title="Day Posted", bbox_to_anchor=(1.05,1))
     plt.grid(alpha=0.3)
-
-    fig.tight_layout()
-    fig.savefig("visualizations/daysort_comments_vs_upvotes.png", dpi=150)
-    plt.close(fig)
-    print("Saved visualizations/daysort_comments_vs_upvotes.png")
-
+    
+    fig.savefig("visualizations/daysort_comments_vs_upvotes.png")
     plt.show()
-
+    plt.close()
+daysort_upvotes_vs_comments(reddit_posts)
 
 # effect of title length on upvotes removing outliers and removing dense numbers
 def titlelength_upvotes():
@@ -127,6 +125,7 @@ def titlelength_upvotes():
     plt.grid(True, linestyle="--", alpha=0.3)
 
     plt.show()
+    plt.close()
 
 #Upvotes vs variables
 def var_up(df):
