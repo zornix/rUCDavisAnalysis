@@ -195,7 +195,7 @@ def train_random_forest() -> Tuple[RandomForestRegressor, List[str]]:
     y_pred = model.predict(X_test_enc)
     y_true = y_test.to_numpy(dtype=float)
 
-    # error metrics on log1p scale and then we transform back for original-scale mae/rmse/r2
+    # error metrics on log1p scale and then we transform back for original-scale metrics
     mae_log = mean_absolute_error(y_true, y_pred)
     rmse_log = np.sqrt(mean_squared_error(y_true, y_pred))
     r2_log = r2_score(y_true, y_pred)

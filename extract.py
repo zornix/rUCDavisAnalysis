@@ -103,9 +103,11 @@ def extract() -> list[dict]:
         fetch = fetch_page(cursor)
         listdata, next_cursor = fetch[0], fetch[1]
         save_cursor(next_cursor)
+
         if next_cursor is None and listdata:
             print("Reached end of listing (1000 items). ")
         print("Fetched the page")
+
     except Exception as e:
         print("Extract stage fail:", e)
         return []

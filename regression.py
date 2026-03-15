@@ -74,9 +74,11 @@ def run_regression():
     ols_diagnostics(model, X)
 
     # robust standard errors
+    print("Robust standard errors summary:")
     robust_model = model.get_robustcov_results('HC3')
     print(robust_model.summary())
 
+    print("Regular model summary:")
     print(model.summary())
     return model
 

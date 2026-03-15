@@ -21,7 +21,7 @@ def run_pipeline(subreddit: str = "UCDavis",
     raw_posts = extract() # Gets the raw posts
     transformed_df = transform(raw_posts) # Clean and engineer features
     load(transformed_df, DB_PATH) # Write sqlite
-    return transformed_df # Return transformer DataFrame
+    return transformed_df # Return transformed DataFrame
 
 
 
@@ -33,36 +33,39 @@ what this function should do:
     print a summary header
     print a readable preview for each post
     print a footer at the end
-    handle empty DataFrames gracefully
+    handle empty DataFrames
 """
-# def display_output(df: pd.DataFrame) -> None:
-#     if df.empty:
-#         print("No posts to display.")
-#         return
 
-#     print("\n========== POSTS PREVIEW ==========\n")
 
-#     for row in df.iterrows():
-#         print(f"Title: {row['title']}")
-#         print(f"Timestamp: {row['hours']}") # used to be created_utc
-#         print(f"Time Category: {row['time_category']}")
-#         print(f"Day Posted: {row['day_posted']}")
-#         print(f"Title Length: {row['title_length']}")
-#         print(f"Title Words: {row['title_words']}")
-#         print(f"Text: {row['selftext']}")
-#         print(f"Text Length: {row['selftext_length']}")
-#         print(f"Text Words: {row['selftext_words']}")
-#         print(f"Media: {row['media']}")
-#         print(f"Attachment: {row['attachment']}")
-#         print(f"Flair: {row['flair']}")
-#         print(f"Flair Text: {row['flair_text']}")
-#         print(f"Question: {row['has_question']}")
-#         print(f"Upvotes: {row['upvotes']}")
-#         print(f"Number of Keywords: {row['num_keywords']}")
-#         print(f"Upvote Ratio: {row['upvote_ratio']}")
-#         print(f"Engagement Ratio: {row['engagement_ratio']}")
-#         print("-" * 100)
+def display_output(df: pd.DataFrame) -> None:
+    if df.empty:
+        print("No posts to display.")
+        return
 
-#     print("\n========== END ==========\n")
-#     pass
+    print("\n========== POSTS PREVIEW ==========\n")
+
+    for _, row in df.iterrows():
+        print(f"ID: {row['id']}")
+        print(f"Title: {row['title']}")
+        print(f"Timestamp: {row['timestamp']}")
+        print(f"Time Category: {row['time_category']}")
+        print(f"Day Posted: {row['day_posted']}")
+        print(f"Title Length: {row['title_length']}")
+        print(f"Title Words: {row['title_words']}")
+        print(f"Text: {row['selftext']}")
+        print(f"Text Length: {row['selftext_length']}")
+        print(f"Text Words: {row['selftext_words']}")
+        print(f"Media: {row['media']}")
+        print(f"Attachment: {row['attachment']}")
+        print(f"Flair: {row['flair']}")
+        print(f"Flair Text: {row['flair_text']}")
+        print(f"Question: {row['question']}")
+        print(f"Upvotes: {row['upvotes']}")
+        print(f"Upvote Ratio: {row['upvote_ratio']}")
+        print(f"Num Comments: {row['num_comments']}")
+        print(f"Number of Keywords: {row['num_keywords']}")
+        print(f"Score: {row['score']}")
+        print("-" * 100)
+
+    print("\n========== END ==========\n")
 

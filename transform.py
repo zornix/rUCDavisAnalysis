@@ -6,7 +6,6 @@ We will clean raw reddit post data, detect useful flags, and add engineered feat
 The output should be a pandas DataFrame that matches the db schema.
 """
 
-from pkgutil import get_data
 import re
 
 import pandas as pd

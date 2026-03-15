@@ -42,9 +42,6 @@ EMOJI_PATTERN = re.compile(
     flags=re.UNICODE,
 )
 
-# don't change --- reddit's json api caps a single request at 100 posts
-DEFAULT_BATCH_SIZE = 100
-
 # min post age
 MIN_POST_AGE_HOURS = 12
 
