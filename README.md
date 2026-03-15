@@ -34,4 +34,5 @@ regression.py: Loads data from the DB, prepares features (dummies for categorica
 randomforest.py: Trains a RandomForest regressor on log(upvotes), runs 5-fold CV and held-out test set evaluation, and produces feature importance, permutation importance, and predicted-vs-actual values plots.
 
 **Visualizations**
+
 visualizations.py: EDA and summary plots, distributions (numeric/categorical), correlation heatmaps, and scatter/box plots (e.g., upvotes vs comments, title length, time of day).
