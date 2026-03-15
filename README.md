@@ -2,19 +2,14 @@
 
 Which features of a Reddit post on r/UCDavis correlate with the highest engagement (measured in number of upvotes)?
 
-As students, having a way to communicate with others and make connections is one of the foundations to having a fulfilling college experience. By scrapping the UCD reddit page and predicting what post would get the most engagement through upvotes we can utilize that if there is ever a need to spread information, like potential college or club events.
+As students, having a way to communicate with others and make connections is one of the foundations of having a fulfilling college experience. By scraping the UCD Reddit page and predicting what post would get the most engagement through upvotes, we can utilize that if there is ever a need to spread information, like potential college or club events.
 
-Our goal is to analyze the different factors that make up a post such as date posted, title, number of comments, hashtags, images or videos, hashtags, user information, links, keywords, etc. Using these variables, we will predict which combination best gets you the most number of upvotes in the UC Davis subreddit.
+Our goal is to analyze the different factors that make up a post, such as date posted, title, number of comments, hashtags, images or videos, user information, links, keywords, etc. Using these variables, we will predict which combination best gets you the most number of upvotes in the UC Davis subreddit.
 
 
 Prerequisites to run the code:
 ```pip install -r requirements.txt```
 
-**Pipeline**
-
-pipeline.py: Top-level orchestrator that runs extract → transform → load and returns the transformed DataFrame.
-config.py: Central constants (Reddit API headers/URL, DB path, table name, cursor file, emoji regex, batch size, sleep/time thresholds).
-init.py: Runs the pipeline repeatedly until a target number of posts is processed; used to build up the dataset over multiple batches.
 
 **ETL Pipeline**
 
@@ -34,9 +29,9 @@ init.py: Runs the pipeline repeatedly until a target number of posts is processe
 
 **Modeling & analysis**
 
-regression.py: Loads data from the DB, prepares features (dummies for categorical variables, log-transformed responce -> upvotes), fits multiple OLS and Lasso, and makes residuals and Q-Q plot.
+regression.py: Loads data from the DB, prepares features (dummies for categorical variables, log-transformed response -> upvotes), fits multiple OLS and Lasso, and makes residuals and Q-Q plot.
 
 randomforest.py: Trains a RandomForest regressor on log(upvotes), runs 5-fold CV and held-out test set evaluation, and produces feature importance, permutation importance, and predicted-vs-actual values plots.
 
 **Visualizations**
-visualizations.py: EDA and summary plots, distributions (numeric/categorical), correlation heatmaps, and scatter/box plots (e.g. upvotes vs comments, title length, time of day).
+visualizations.py: EDA and summary plots, distributions (numeric/categorical), correlation heatmaps, and scatter/box plots (e.g., upvotes vs comments, title length, time of day).
