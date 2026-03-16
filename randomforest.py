@@ -232,8 +232,6 @@ def main():
     plot_feature_importance(model, feature_names, top_n=25)
     plot_permutation_importance(model, X_test_enc, y_true, top_n=25)
     plot_predicted_vs_actual(y_true, y_pred)
-    plot_residuals(y_true, y_pred)
-
 
 if __name__ == "__main__":
     main()
