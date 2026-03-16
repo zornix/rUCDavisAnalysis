@@ -4,7 +4,7 @@ import time
 import pandas as pd
 import sqlite3
 from pipeline import run_pipeline, display_output
-from config import PAGE_SLEEP_SECONDS, DB_PATH
+from config import PAGE_SLEEP_SECONDS, DB_PATH, TABLE_NAME
 
 
 # this function will run the pipeline until it has processed the required amount of posts.
